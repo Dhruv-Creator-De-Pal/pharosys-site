@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Primary Pages -->
+    <url>
+        <loc>https://pharosys.com/index.html</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Policy Pages -->
+    <url>
+        <loc>https://pharosys.com/privacy-policy.html</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://pharosys.com/terms.html</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Coming Soon Pages -->
+    <url>
+        <loc>https://pharosys.com/pricing.html</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://pharosys.com/blog.html</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://pharosys.com/about.html</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://pharosys.com/contact.html</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://pharosys.com/help.html</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+</urlset>

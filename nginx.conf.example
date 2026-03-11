@@ -1,0 +1,150 @@
+# Pharosys Nginx Configuration Example
+# Use this if your hosting uses nginx instead of Apache
+
+# This configuration should go in your nginx server block
+# Usually located at: /etc/nginx/sites-available/your-domain.conf
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name pharosys.com www.pharosys.com;
+    
+    # Redirect HTTP to HTTPS
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name pharosys.com www.pharosys.com;
+    
+    # SSL Certificate Paths (update with your actual paths)
+    ssl_certificate /etc/letsencrypt/live/pharosys.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/pharosys.com/privkey.pem;
+    
+    # SSL Configuration
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:SSL:50m;
+    
+    # HSTS - Strict Transport Security
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+    
+    # Security Headers
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "DENY" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    
+    # Content Security Policy
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" always;
+    
+    # Remove X-Powered-By
+    proxy_hide_header X-Powered-By;
+    
+    # Root directory
+    root /var/www/pharosys.com/public_html;
+    index index.html index.htm;
+    
+    # Charset
+    charset utf-8;
+    
+    # Gzip Compression
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 256;
+    gzip_types text/html text/css text/xml text/javascript application/json application/javascript application/xml+rss;
+    gzip_disable "msie6";
+    
+    # Browser Cache Control
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|eot|ttf|otf)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+    
+    # Cache HTML files
+    location ~* \.(html|htm)$ {
+        expires 1w;
+        add_header Cache-Control "public, must-revalidate";
+    }
+    
+    # Block access to sensitive files
+    location ~ /\. {
+        deny all;
+    }
+    
+    location ~ ~$ {
+        deny all;
+    }
+    
+    location ~ /\.well-known/ {
+        allow all;
+    }
+    
+    location ~ ^/\.(env|git|gitignore|htaccess|htpasswd)$ {
+        deny all;
+    }
+    
+    # Block access to common sensitive files
+    location ~ ^/(composer\.json|composer\.lock|web\.config|php\.ini)$ {
+        deny all;
+    }
+    
+    # Prevent SQL injection and XSS
+    if ($query_string ~* "(\<|%3C).*script.*(>|%3E)") {
+        return 403;
+    }
+    
+    if ($query_string ~* "(union|select|insert|update|delete|drop|create|alter|exec|script|javascript|eval)") {
+        return 403;
+    }
+    
+    # Main location
+    location / {
+        # Try to serve file directly, fallback to index.html
+        try_files $uri $uri/ /index.html;
+    }
+    
+    # Deny direct access to sensitive files
+    location ~ \.(md|conf|log|lock|sql)$ {
+        deny all;
+    }
+    
+    # Security.txt location
+    location = /.well-known/security.txt {
+        alias /var/www/pharosys.com/public_html/.well-known/security.txt;
+        add_header Content-Type "text/plain";
+    }
+    
+    # Robots.txt
+    location = /robots.txt {
+        try_files $uri =404;
+    }
+    
+    # Sitemap
+    location = /sitemap.xml {
+        try_files $uri =404;
+    }
+    
+    # Favicon
+    location = /favicon.ico {
+        try_files $uri =204;
+    }
+    
+    # Error handling
+    error_page 404 /index.html;
+    error_page 500 502 503 504 /50x.html;
+    
+    # Access and error logs
+    access_log /var/log/nginx/pharosys.com-access.log;
+    error_log /var/log/nginx/pharosys.com-error.log;
+}
+
+# After creating this config:
+# 1. Save as: /etc/nginx/sites-available/pharosys.com.conf
+# 2. Enable: sudo ln -s /etc/nginx/sites-available/pharosys.com.conf /etc/nginx/sites-enabled/
+# 3. Test: sudo nginx -t
+# 4. Reload: sudo systemctl reload nginx
+# 5. Update paths to match your setup

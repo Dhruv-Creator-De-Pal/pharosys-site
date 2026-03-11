@@ -1,0 +1,18 @@
+Contact: security@pharosys.com
+Expires: 2027-03-10T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://pharosys.com/.well-known/security.txt
+Policy: https://pharosys.com/security-policy
+
+# Security Policy for Pharosys
+# This file is provided according to RFC 9116
+
+# Contact Information
+# For security issues, please email: security@pharosys.com
+# Do not open public GitHub issues for security vulnerabilities
+
+# We are committed to security and appreciate responsible disclosure
+# Please allow 90 days for vulnerability remediation before public disclosure
+
+# Acknowledgments
+# We acknowledge researchers who responsibly disclose vulnerabilities

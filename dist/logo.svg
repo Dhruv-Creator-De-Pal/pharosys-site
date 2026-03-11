@@ -1,0 +1,17 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Logo: Pharosys with Play Icon & Tagline -->
+  
+  <!-- Play Icon (Dark Blue) -->
+  <g id="play-icon">
+    <path d="M 150 150 L 150 450 Q 150 500 200 500 L 350 500 Q 400 500 400 450 L 400 150 Q 400 100 350 100 L 200 100 Q 150 100 150 150 Z" 
+          fill="none" stroke="#001f3f" stroke-width="35" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="250,200 250,400 350,300" fill="#001f3f"/>
+  </g>
+  
+  <!-- Pharosys Text -->
+  <text x="450" y="350" font-family="Arial, sans-serif" font-size="120" font-weight="bold" fill="#001f3f">Pharo</text>
+  <text x="450" y="350" font-family="Arial, sans-serif" font-size="120" font-weight="bold" fill="#ff7a3d" text-anchor="start" x="650">sys</text>
+  
+  <!-- BUILD TO SCALE Tagline -->
+  <text x="450" y="420" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#ff7a3d" letter-spacing="8">BUILD TO SCALE</text>
+</svg>
