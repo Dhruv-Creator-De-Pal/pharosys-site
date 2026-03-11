@@ -1,6 +1,14 @@
 import { motion } from 'framer-motion'
 
 export function CTA() {
+  const handleStartPilot = () => {
+    window.location.href = 'mailto:dits.contactus@gmail.com?subject=Start%20Pharosys%20Pilot'
+  }
+
+  const handleEmailTeam = () => {
+    window.location.href = 'mailto:dits.contactus@gmail.com'
+  }
+
   return (
     <motion.section
       id="contact"
@@ -30,8 +38,8 @@ export function CTA() {
             keep your business running live even when the internet drops.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <button className="btn btn-primary">Start a pilot</button>
-            <button className="btn btn-ghost">Email the team</button>
+            <button className="btn btn-primary" onClick={handleStartPilot}>Start a pilot</button>
+            <button className="btn btn-ghost" onClick={handleEmailTeam}>Email the team</button>
           </div>
         </motion.div>
       </div>

@@ -30,19 +30,21 @@ export function DosCursor() {
     }
     const handleLeave = () => setVisible(false)
     const handleBlur = () => setVisible(false)
+    const handleMouseOut = (e) => {
+      if (!e.relatedTarget) setVisible(false)
+    }
 
     window.addEventListener('mousemove', handleMove)
     window.addEventListener('mouseenter', handleMove)
     window.addEventListener('mouseleave', handleLeave)
-    window.addEventListener('mouseout', (e) => {
-      if (!e.relatedTarget) setVisible(false)
-    })
+    window.addEventListener('mouseout', handleMouseOut)
     window.addEventListener('blur', handleBlur)
 
     return () => {
       window.removeEventListener('mousemove', handleMove)
       window.removeEventListener('mouseenter', handleMove)
       window.removeEventListener('mouseleave', handleLeave)
+      window.removeEventListener('mouseout', handleMouseOut)
       window.removeEventListener('blur', handleBlur)
     }
   }, [x, y])

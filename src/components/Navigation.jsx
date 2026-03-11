@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 
 export function Navigation() {
@@ -6,14 +6,20 @@ export function Navigation() {
   const contactRef = useRef(null)
 
   useEffect(() => {
-    const onClickAway = (e) => {
-      if (contactRef.current && !contactRef.current.contains(e.target)) {
+    function handleClickOutside(event) {
+      if (contactRef.current && !contactRef.current.contains(event.target)) {
         setShowContact(false)
       }
     }
-    window.addEventListener('click', onClickAway)
-    return () => window.removeEventListener('click', onClickAway)
-  }, [])
+
+    // Only attach listener when dropdown is open
+    if (showContact) {
+      document.addEventListener('click', handleClickOutside, false)
+      return () => {
+        document.removeEventListener('click', handleClickOutside, false)
+      }
+    }
+  }, [showContact])
 
   return (
     <motion.header
@@ -84,7 +90,10 @@ export function Navigation() {
                 </div>
               )}
             </div>
-            <button className="btn btn-primary text-xs md:text-sm">
+            <button 
+              className="btn btn-primary text-xs md:text-sm"
+              onClick={() => setShowContact(true)}
+            >
               Book a demo
             </button>
           </div>

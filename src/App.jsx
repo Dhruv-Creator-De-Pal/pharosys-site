@@ -6,9 +6,11 @@ import { SkylineScene } from './components/Skyline'
 
 function App() {
   const [splashComplete, setSplashComplete] = useState(false)
+  const [isClient, setIsClient] = useState(false)
 
-  // Check if splash was already shown in this session
+  // Only run on client side
   useEffect(() => {
+    setIsClient(true)
     const alreadySeen = sessionStorage.getItem('pharosysSplashSeen') === '1'
     if (alreadySeen) {
       setSplashComplete(true)
@@ -17,7 +19,10 @@ function App() {
 
   const handleSplashComplete = useCallback(() => {
     setSplashComplete(true)
+    sessionStorage.setItem('pharosysSplashSeen', '1')
   }, [])
+
+  if (!isClient) return null
 
   return (
     <div className="bg-navy-dark min-h-screen">

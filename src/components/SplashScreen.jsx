@@ -60,8 +60,11 @@ export function SplashScreen({ onComplete }) {
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.9, delay: 0.25 }}
+      transition={{ duration: 0.5 }}
       className="fixed inset-0 bg-black z-50 flex items-center justify-center overflow-hidden"
+      style={{
+        pointerEvents: 'auto',
+      }}
     >
       {/* Logo and text */}
       <div className="relative z-10 text-center space-y-2">

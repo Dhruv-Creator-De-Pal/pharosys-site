@@ -21,6 +21,14 @@ const itemVariants = {
 }
 
 export function Hero() {
+  const handleLaunchDemo = () => {
+    window.location.href = 'mailto:dits.contactus@gmail.com?subject=Launch%20Demo'
+  }
+
+  const handleSecurityProfile = () => {
+    window.location.href = '#security'
+  }
+
   return (
     <motion.section
       initial="hidden"
@@ -57,8 +65,8 @@ export function Hero() {
 
             {/* CTA Buttons */}
             <motion.div variants={itemVariants} className="flex flex-wrap gap-3 pt-2">
-              <button className="btn btn-primary">Launch demo</button>
-              <button className="btn btn-ghost">See security profile</button>
+              <button className="btn btn-primary" onClick={handleLaunchDemo}>Launch demo</button>
+              <button className="btn btn-ghost" onClick={handleSecurityProfile}>See security profile</button>
             </motion.div>
 
             {/* Feature pills */}
