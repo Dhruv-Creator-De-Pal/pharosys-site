@@ -2,11 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  // Use relative asset paths so the bundle still works when served from a subdirectory
-  // (e.g., GitHub Pages or when opening the built files directly).
-  // This prevents refreshes from breaking because the browser can no longer find `/assets/...`.
-  base: './',
   plugins: [react()],
+  base: '/',
   server: {
     port: 5173,
     open: true
